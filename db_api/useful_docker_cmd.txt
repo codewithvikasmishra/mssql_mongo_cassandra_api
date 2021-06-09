@@ -1,0 +1,62 @@
+To create a docker image
+docker build -t name_of_docker_image path_of_folder_where_dockerfile_is_located
+docker build -t sql-nosql-api:latest /home/vikesh/Documents/ineuron/db_api
+
+To get the list of iamges in docker
+docker image ls
+
+To start a container
+docker start <container id>
+
+To attach a docker
+docker attach <container id>
+
+To attach and start simultaneously
+docker start -a <container id>
+
+To get the container id which was last created
+docker ps -q -l
+
+To check docker which are exited
+docker ps -f"status=exited"
+
+To see all conatiners
+docker ps -a
+
+To remove docker container
+docker rm container_id
+
+To remove docker images
+docker rmi image_id image_id
+
+to delete multiple docker images
+docker rmi image_id image_id
+
+to delete docker image forcely
+docker rmi -f image_id
+docker rmi -f image_id image_id
+
+To check the logs of container
+docker container logs --details <container id>
+
+pyodbc docker installation:
+step 1(but not suggested in production environment):
+    pyodbc is not available to install in docker so we need a local image
+    docker pull laudio/pyodbc
+    and in docker file you need to mention below commands to accept the license key
+    FROM laudio/pyodbc:1.0.4
+    USER root
+    ENV ACCEPT_EULA=Y
+
+step 2:
+    Check what operating system (Debian/Ubuntu) you have from Docker info command
+    The below code is for ubuntu operating system
+    
+    RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+    RUN apt-get update && apt-get install -y apt-utils && apt-get clean -y
+    RUN ACCEPT_EULA=Y apt-get -y install msodbcsql17 \
+    && ACCEPT_EULA=Y apt-get -y install mssql-tools
+
+    RUN apt-get install unixodbc-dev  && apt-get clean -y

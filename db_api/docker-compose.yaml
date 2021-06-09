@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+    mssql-api:
+        build:
+            context: .
+            dockerfile: Dockerfile.mssql
+        image: sql-nosql-api:mssql
+        container_name: mssql-api
+        volumes:
+            - ".:/db_api"
+        ports:
+            - "5000:5000"
+
+    mongo-api:
+        build:
+            context: .
+            dockerfile: Dockerfile.mongo
+        image: sql-nosql-api:mongo
+        container_name: mongo-api
+        volumes:
+            - ".:/db_api"
+        ports:
+            - "8081:8081"
+
+    cassandra-api:
+        build:
+            context: .
+            dockerfile: Dockerfile.cassandra
+        image: sql-nosql-api:cassandra
+        container_name: cassandra-api
+        volumes:
+            - ".:/db_api"
+        ports:
+            - "5001:5001"            

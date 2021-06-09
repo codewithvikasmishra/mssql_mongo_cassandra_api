@@ -1,0 +1,5 @@
+Flask
+pandas
+pymongo
+pymongo[srv]
+cassandra-driver

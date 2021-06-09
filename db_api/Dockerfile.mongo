@@ -1,0 +1,16 @@
+FROM python:3.7
+
+MAINTAINER Vikas Kumar Mishra
+COPY requirements_mongo.txt ./requirements_mongo.txt
+
+ENV FLASK_APP=mongo_api.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+RUN pip install --no-cache-dir -r requirements_mongo.txt
+
+EXPOSE 8081
+
+COPY . /db_api/app
+WORKDIR /db_api/app
+
+CMD ["flask", "run"]

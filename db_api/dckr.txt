@@ -1,0 +1,26 @@
+
+FROM python:3.7
+FROM laudio/pyodbc:1.0.4
+
+USER root
+
+ENV ACCEPT_EULA=Y
+
+MAINTAINER Vikas Kumar Mishra
+COPY requirements.txt ./requirements.txt
+
+ENV FLASK_APP=mssql_api.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+RUN apt-get install -y debconf-utils \
+  && apt-get update -y \
+  && apt-get -y install mssql-tools unixodbc-dev
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 5000
+
+COPY . /db_api/app
+WORKDIR /db_api/app
+
+CMD ["flask", "run"]

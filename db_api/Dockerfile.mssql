@@ -1,0 +1,26 @@
+FROM python:3.7
+
+MAINTAINER Vikas Kumar Mishra
+COPY requirements_sql.txt ./requirements_sql.txt
+
+ENV FLASK_APP=mssql_api.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+# install SQL Server drivers
+RUN apt-get update && apt-get install -y apt-utils && apt-get clean -y
+RUN ACCEPT_EULA=Y apt-get -y install msodbcsql17 \
+    && ACCEPT_EULA=Y apt-get -y install mssql-tools
+
+RUN apt-get install unixodbc-dev  && apt-get clean -y
+
+RUN pip install --no-cache-dir -r requirements_sql.txt
+
+EXPOSE 5000
+
+COPY . /db_api/app
+WORKDIR /db_api/app
+
+CMD ["flask", "run"]

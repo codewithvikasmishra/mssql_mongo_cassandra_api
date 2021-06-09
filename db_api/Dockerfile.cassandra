@@ -1,0 +1,16 @@
+FROM python:3.7
+
+MAINTAINER Vikas Kumar Mishra
+COPY requirements_cassandra.txt ./requirements_cassandra.txt
+
+ENV FLASK_APP=cassandra_api.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+RUN pip install --no-cache-dir -r requirements_cassandra.txt
+
+EXPOSE 5001
+
+COPY . /db_api/app
+WORKDIR /db_api/app
+
+CMD ["flask", "run"]

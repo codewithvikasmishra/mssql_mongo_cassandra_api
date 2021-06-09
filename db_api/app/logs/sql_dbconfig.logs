@@ -1,0 +1,2 @@
+[INFO][db-connection][2021-06-09 14:05:31,749]: Cursor prepared for mssql database
+[INFO][db-connection][2021-06-09 14:05:31,755]: SQL version = ('Microsoft SQL Server 2019 (RTM-CU8-GDR) (KB4583459) - 15.0.4083.2 (X64) \n\tNov  2 2020 18:35:09 \n\tCopyright (C) 2019 Microsoft Corporation\n\tDeveloper Edition (64-bit) on Linux (Ubuntu 20.04.2 LTS) <X64>', )

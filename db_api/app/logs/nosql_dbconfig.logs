@@ -1,0 +1,2 @@
+[INFO][db-connection][2021-06-09 14:05:32,693]: Connection established for cassandra database
+[INFO][db-connection][2021-06-09 14:05:33,738]: Connection established for mongo database
